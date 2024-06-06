@@ -1,0 +1,54 @@
+:root {
+    --button-color: #2c7fc7;
+    --dashboard-title-color: rgb(3, 3, 93);
+    --button-text: white;
+    --text-color: rgb(42, 42, 75);
+    --options-text: navy;
+    --options-icon: rgb(32, 131, 170);
+    --table-header-color: rgb(224, 224, 224);
+    --box-shadow-color: rgb(126, 144, 150);
+    --text-color: aliceblue;
+    --hover-bg-color: rgba(15, 79, 116, 0.744);
+    --hover-text-color: rgb(170, 184, 197);
+    --card-title-color: navy;
+    --validation-color: red;
+    --body-background-color: rgb(237, 237, 237);
+    --custom-tab-active-color: #297dc6;
+    /*Header BGcolor*/
+    --header-bgcolor: linear-gradient(to right, #142737, #154f82);
+    /*Login Page Colours*/
+    --login-primary-color: #142737;
+    --login-secondary-color: #154f82;
+    --login-card-bg-color: rgb(246, 251, 252);
+    --login-button-bg-color: #026595;
+    --login-disabled-bg-color: rgb(183, 182, 182);
+    --login-box-color: rgb(211, 211, 211);
+    /*Mat Pop-up colours*/
+    --mat-popup-bgcolor: #fff;
+    --mat-key-color: #154f82;
+    --mat-value-color: black;
+    --mat-header-color: white;
+    --mat-border-color: rgb(192, 186, 186);
+    --mat-primay-color: navy;
+    --mat-accent-color: orange;
+    --dialog-body-key-color: #515354
+    --dialog-content-padding-left:20px;
+    --dialog-body-value-color:#000000;
+    --mat-form-field-width:100%;
+    --dilaog-key-width:43%;
+    --dialog-value-width:55%;
+    --dialog-update-button-width:15rem;
+    --dialog-update-button-radius:20px;
+    --dailog-update-button-font-size:18px;
+    --dialog-update-button-color:white;
+    --dialog-key-font-size:18px;
+    --dialog-value-font-size:17px;
+    --dialog-content-box-shadow:0 4px 6px rgba(220, 230, 228, 0.1);
+    --dialog-update-button-disabled-color:grey;
+    --loader-height:6.25rem;
+    --loader-background-color:rgba(255, 255, 255, 0.8);
+    --dialog-error-message-font-size:12px;
+    --dialog-error-message-color:red;
+    --dialog-error-box-shadow:0px 2px 4px rgba(0, 0, 0, 0.1);
+    --dialog-error-box-background-color: #ffdddd;
+}

@@ -1,0 +1,13 @@
+<mat-toolbar class="header">
+  <div class="logo">
+    <img src="../../../../assets/images/CITI.png" alt="Citi-Logo" class="logo-image" routerLink="/home">
+  </div>
+  <span id="title" [style.marginLeft.px]="usernameWidth" class="center-title">Customer Session Portal</span>
+  <span id="username" *ngIf="service.isLoggedIn">{{ capitalizeFirstLetter(service.username) }}</span>
+  <button *ngIf="service.isLoggedIn" mat-icon-button [matMenuTriggerFor]="menu" class="login-button">
+    <mat-icon routerLink="/login">exit_to_app</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item *ngIf="service.isLoggedIn" (click)="logOut()">Logout</button>
+  </mat-menu>
+</mat-toolbar>

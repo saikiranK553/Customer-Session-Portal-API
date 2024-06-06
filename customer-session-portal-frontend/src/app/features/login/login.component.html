@@ -1,0 +1,45 @@
+<app-header></app-header>
+<section class="flex-container">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-5"><img src="assets/images/draw2.webp" class="img-fluid" alt="Sample image"></div>
+      <div class="col-md-5">
+        <div class="d-flex flex-column align-items-center">
+          <mat-card class="login-card">
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
+              <mat-card-content>
+                <mat-form-field appearance="outline" class="mb-4 custom-form-field">
+                  <mat-label>Username</mat-label>
+                  <mat-icon matPrefix>
+                    <mat-icon>person</mat-icon>
+                  </mat-icon>
+                  <input matInput formControlName="username" placeholder="Enter username">
+                  <mat-error *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+                    Username is required.
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="mb-4 custom-form-field">
+                  <mat-label>Password</mat-label>
+                    <mat-icon matPrefix>
+                      <mat-icon>lock</mat-icon>
+                    </mat-icon>
+                  <input matInput type="password" formControlName="password" placeholder="Enter password">
+                  <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                    Password is required.
+                  </mat-error>
+                </mat-form-field>
+                <div class="text-center mt-0">
+                  <button [disabled]="loginForm.invalid" mat-raised-button type="submit" class="login-button">
+                    <mat-icon>account_circle</mat-icon>Login
+                  </button>
+                  <br><br>
+                  <mat-error *ngIf="errorMessage" class="error-message">{{ errorMessage }}</mat-error>
+                </div>
+              </mat-card-content>
+            </form>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

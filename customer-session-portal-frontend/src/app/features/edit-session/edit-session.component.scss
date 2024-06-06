@@ -1,0 +1,172 @@
+@import url(/src/assets/styles/variables.scss);
+@import url(/src/assets/fonts/fonts.scss);
+
+.close-button {
+    position: absolute;
+    top: 7px;
+    right: 0px;
+    min-width: 10px;
+    min-height: 10px;
+    color: var(--mat-header-color);
+    border: none;
+}
+
+.dialog-title {
+    font-size: var(--edit--title-font);
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+    color: var(--mat-header-color);
+    padding-top: 0.9375rem;
+}
+
+.header {
+    align-items: start;
+    background: var(--header-bgcolor);
+}
+
+.dialog-content {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px !important;
+    box-shadow: var(--dialog-content-box-shadow);
+
+    textarea.mat-input-element {
+        width: 100%;
+    }
+
+    textarea {
+        font-weight: bold;
+    }
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.column-label {
+    width: var(--dilaog-key-width);
+    color: var(--dialog-body-key-color);
+    font-weight: bold;
+    font-size: var(--dialog-key-font-size);
+}
+
+.column-input {
+    padding: 0px 2px;
+    width: var(--dialog-value-width);
+
+    mat-form-field {
+        padding: 0;
+        width: var(--mat-form-field-width);
+        font-weight: bold;
+    }
+
+    font-weight: bold;
+    color: var(--dialog-body-value-color);
+}
+
+.sName {
+    margin-top: 1.5rem;
+}
+
+.update-button {
+    display: flex;
+    justify-content: center;
+
+    button {
+        width: var(--dialog-update-button-width);
+        border-radius: var(--dialog-update-button-radius);
+        background: var(--button-color);
+        color: var(--dialog-update-button-color);
+        font-size: var(--dailog-update-button-font-size);
+
+        &:not([disabled]) {
+            background: var(--button-color);
+        }
+
+        &[disabled] {
+            background: var(--dialog-update-button-disabled-color);
+        }
+    }
+
+    margin-top: 15px;
+}
+
+.remark {
+    width: 100%;
+
+    mat-form-filed {
+        textarea {
+            font-weight: bold;
+        }
+    }
+}
+
+.sName mat-form-field {
+    margin-left: 2px;
+    max-width: 100%;
+}
+
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: var(--loader-height);
+}
+
+.error-message {
+    left: 0;
+    position: absolute;
+    top: 0;
+    display: flex;
+    align-items: center;
+    color: var(--dialog-error-message-color);
+    font-size: var(--dialog-error-message-font-size);
+}
+
+.error-icon {
+    margin-right: 4px;
+}
+
+.error-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.error-box {
+    background-color: var(--dialog-error-box-background-color);
+    border-radius: 4px;
+    padding: 8px;
+    box-shadow: var(--dialog-error-box-shadow);
+    display: flex;
+    align-items: center;
+}
+
+.spinner-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--loader-background-color);
+    z-index: 9999;
+}
+
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+
+    .column-label {
+        width: 100%;
+    }
+
+    .column-input {
+        width: 100%;
+    }
+}

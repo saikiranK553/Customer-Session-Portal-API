@@ -1,0 +1,47 @@
+<mat-toolbar class="header">
+  <button mat-icon-button class="close-button" (click)="onClose()">
+    <mat-icon>close</mat-icon></button>
+  <div class="dialog-title">
+    <h3>Create Session</h3>
+  </div>
+</mat-toolbar>
+<form [formGroup]="createSessionForm" (ngSubmit)="createSession()">
+  <mat-dialog-content class="form-container">
+    <div class="form-row-single">
+      <mat-label>Customer ID</mat-label>
+      <mat-form-field appearance="outline" class="small-input">
+        <input matInput formControlName="customerId" name="customerId">
+        <mat-error *ngIf="customerId?.touched && customerId?.invalid">Customer Id is required</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-row">
+      <mat-label>Session Name</mat-label>
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="sessionName" name="sessionName">
+        <mat-error *ngIf="sessionName?.errors?.['required']"  >Session Name is required</mat-error>
+        <mat-error *ngIf="sessionName?.errors?.['minlength']"  >Session Name must have 4 characters</mat-error>
+        <mat-error *ngIf="sessionName?.errors?.['pattern']">Special characters are not allowed</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-row">
+      <mat-label>Remarks</mat-label>
+      <mat-form-field appearance="outline">
+        <textarea class="remarks" matInput formControlName="remarks" name="remarks"></textarea>
+        <mat-error *ngIf="remarks?.errors?.['required']"  >Remarks are required</mat-error>
+        <mat-error *ngIf="remarks?.errors?.['maxlength']"  >Remarks should not contain more than 255 characters</mat-error>
+        <mat-error *ngIf="remarks?.errors?.['minlength']"  >Remarks must have 4 characters</mat-error>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <div class="submit-container">
+      <button mat-raised-button [class.custom-button-color]="!createSessionForm.invalid && !isLoading"
+        [disabled]="createSessionForm.invalid || isLoading" class="submit">Create</button>
+    </div>
+    <ng-container *ngIf="isLoading; else createButtonContent">
+      <mat-spinner diameter="20"></mat-spinner>
+    </ng-container>
+    <ng-template #createButtonContent></ng-template>
+    <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </mat-dialog-actions>
+</form>

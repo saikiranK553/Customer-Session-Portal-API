@@ -1,0 +1,33 @@
+<div class="dialog-box">
+    <mat-toolbar class="header">
+        <button mat-icon-button class="close-button" (click)="onCancelClick()">
+            <mat-icon>close</mat-icon></button>
+        <div class="dialog-title">
+            <h3>Delete Session</h3>
+        </div>
+    </mat-toolbar>
+    <div class="dialog-content">
+        <div class="info-section">
+            <div class="info-label">Session ID</div>
+            <div class="info-value">:{{ session.sessionId }}</div>
+        </div>
+        <div class="info-section">
+            <div class="info-label">Customer Name</div>
+            <div class="info-value">:{{ session.customerName }}</div>
+        </div>
+        <div class="info-section">
+            <div class="info-label">Relationship Name</div>
+            <div class="info-value">:{{ session.createdBy }}</div>
+        </div>
+        <div class="info-section">
+            <div class="info-label">Session Name</div>
+            <div class="info-value">:{{ session.sessionName }}</div>
+        </div>
+        <div class="info-section">
+            <div class="info-label">Notes</div>
+        </div>
+        <textarea class="info-value box" name="remarks">{{ session.remarks }}</textarea>
+    </div>
+    <div class="delete-confirm">Are you sure to delete the session?</div>
+    <button mat-raised-button class="submit" (click)="deleteSession()">Delete</button>
+</div>

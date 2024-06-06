@@ -1,0 +1,193 @@
+<app-header></app-header>
+<div class="welcome">
+  <h2>Welcome to the Session Portal!</h2>
+  <button mat-raised-button (click)="createSessionDialog()">
+    <mat-icon>add_circle_outline</mat-icon>New Session
+  </button>
+</div>
+<div class="dashboard">
+  <mat-tab-group
+    animationDuration="0ms"
+    mat-stretch-tabs="false"
+    mat-align-tabs="start"
+    (selectedTabChange)="onTabChange($event)">
+    <mat-tab label="Active Sessions">
+      <div class="table-container">
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="sessionName">
+            <th mat-header-cell *matHeaderCellDef id="table-header">
+              Session Name
+            </th>
+            <td mat-cell *matCellDef="let session">
+              {{ session.sessionName }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="sessionID">
+            <th mat-header-cell *matHeaderCellDef id="table-header">
+              Session ID
+            </th>
+            <td mat-cell *matCellDef="let session">
+              {{ transformSessionID(session.sessionId) }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="customerName">
+            <th mat-header-cell *matHeaderCellDef id="table-header">
+              Customer Name
+            </th>
+            <td mat-cell *matCellDef="let session" class="customerName">
+              {{ session.customerName }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="createdBy">
+            <th mat-header-cell *matHeaderCellDef id="table-header">
+              Created By
+            </th>
+            <td mat-cell *matCellDef="let session">{{ session.createdBy }}</td>
+          </ng-container>
+          <ng-container matColumnDef="updatedBy">
+            <th mat-header-cell *matHeaderCellDef id="table-header">
+              Updated By
+            </th>
+            <td mat-cell *matCellDef="let session">{{ session.updatedBy }}</td>
+          </ng-container>
+          <ng-container matColumnDef="createdOn">
+            <th mat-header-cell *matHeaderCellDef id="table-header">
+              Created On
+            </th>
+            <td mat-cell *matCellDef="let session" class="createdOn">
+              {{ session.createdOn | moment : "DD-MMM-YYYY" }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="updatedOn">
+            <th mat-header-cell *matHeaderCellDef id="table-header">
+              Updated On
+            </th>
+            <td mat-cell *matCellDef="let session" class="updatedOn">
+              {{ session.updatedOn | moment : "DD-MMM-YYYY" }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef id="table-header">Status</th>
+            <td mat-cell *matCellDef="let session">Active</td>
+          </ng-container>
+          <ng-container matColumnDef="view">
+            <th mat-header-cell *matHeaderCellDef id="table-header" class="small-column">
+              View
+            </th>
+            <td mat-cell *matCellDef="let session" class="small-column">
+              <mat-icon id="options" (click)="viewSession(session)">remove_red_eye</mat-icon>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef id="table-header" class="small-column">
+              Edit
+            </th>
+            <td mat-cell *matCellDef="let session" class="small-column">
+              <mat-icon id="options" (click)="editSession(session)">edit</mat-icon>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef id="table-header" class="small-column">
+              Delete
+            </th>
+            <td mat-cell *matCellDef="let session" class="small-column">
+              <mat-icon id="options" (click)="deleteSession(session)">delete</mat-icon>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="archiveFlag">
+            <th mat-header-cell *matHeaderCellDef id="table-header" class="small-column">
+              Archive
+            </th>
+            <td mat-cell *matCellDef="let session" class="small-column">
+              <mat-icon (click)="archiveSession(session)" id="options" *ngIf="session.archiveFlag === 'Y'">archive</mat-icon>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="activeDisplayedColumns"></tr>
+          <div class="table-data-container">
+            <tr mat-row *matRowDef="let row; columns: activeDisplayedColumns"></tr>
+          </div>
+        </table>
+        <div id="nodata-container" *ngIf="errorMessage">
+          <img src="./../../../assets/images/connection-error.png" alt="Connection Lost" id="no-data-found"/>
+          <p id="error-text">Unable to load the data. Please try after some time!</p>
+        </div>
+        <div id="error-container" *ngIf="noSessions">
+          <img src="./../../../assets/images/empty.png" alt="No Data Found" id="error-image"/>
+          <p>No Data To Display</p>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Archived Sessions">
+      <div class="table-container">
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="sessionName">
+            <th mat-header-cell *matHeaderCellDef id="table-header">Session Name</th>
+            <td mat-cell *matCellDef="let session">
+              {{ session.sessionName }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="sessionID">
+            <th mat-header-cell *matHeaderCellDef id="table-header">Session ID</th>
+            <td mat-cell *matCellDef="let session">
+              {{ transformSessionID(session.sessionId) }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="customerName">
+            <th mat-header-cell *matHeaderCellDef id="table-header">Customer Name</th>
+            <td mat-cell *matCellDef="let session" class="customerName">
+              {{ session.customerName }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="createdBy">
+            <th mat-header-cell *matHeaderCellDef id="table-header">Created By</th>
+            <td mat-cell *matCellDef="let session">{{ session.createdBy }}</td>
+          </ng-container>
+          <ng-container matColumnDef="updatedBy">
+            <th mat-header-cell *matHeaderCellDef id="table-header">Updated By</th>
+            <td mat-cell *matCellDef="let session">{{ session.updatedBy }}</td>
+          </ng-container>
+          <ng-container matColumnDef="createdOn">
+            <th mat-header-cell *matHeaderCellDef id="table-header">Created On</th>
+            <td mat-cell *matCellDef="let session">
+              {{ session.createdOn | moment : "DD-MM-YYYY" }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="updatedOn">
+            <th mat-header-cell *matHeaderCellDef id="table-header">Updated On</th>
+            <td mat-cell *matCellDef="let session">
+              {{ session.updatedOn | moment : "DD-MM-YYYY" }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef id="table-header">Status</th>
+            <td mat-cell *matCellDef="let session">Archived</td>
+          </ng-container>
+          <ng-container matColumnDef="view">
+            <th mat-header-cell *matHeaderCellDef id="table-header"class="small-column">View</th>
+            <td mat-cell *matCellDef="let session" class="small-column">
+              <mat-icon id="options" (click)="viewSession(session)">remove_red_eye</mat-icon>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="archiveDisplayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: archiveDisplayedColumns"></tr>
+        </table>
+        <div id="nodata-container" *ngIf="errorMessage">
+          <img src="./../../../assets/images/connection-error.png" alt="Connection Lost" id="no-data-found"/>
+          <p id="error-text">Unable to load the data. Please try after some time!</p>
+        </div>
+        <div id="error-container" *ngIf="noSessions">
+          <img src="./../../../assets/images/empty.png" alt="No Data Found" id="error-image"/>
+          <p>No Data To Display</p>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  <div class="paginator">
+    <mat-paginator
+      [pageSizeOptions]="pageSizeOptions"
+      [length]="totalItems"
+      showFirstLastButtons
+      (page)="onPageChange($event)">
+    </mat-paginator>
+  </div>
+</div>

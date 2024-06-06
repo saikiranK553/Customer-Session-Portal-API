@@ -1,0 +1,21 @@
+@import "./assets/styles/variables.scss";
+@import "./assets/fonts/fonts.scss";
+@import 'ngx-toastr/toastr';
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: "Interstate", sans-serif;
+}
+
+@font-face {
+    font-family: "Interstate";
+    src: url("./assets/fonts/Interstate-Regular-Font.ttf") format("truetype");
+}
+#body-backgound {
+    background-color: var(--body-background-color);
+}

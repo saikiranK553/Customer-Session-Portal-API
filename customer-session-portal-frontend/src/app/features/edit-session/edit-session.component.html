@@ -1,0 +1,87 @@
+<mat-toolbar class="header">
+    <button mat-icon-button class="close-button" (click)="onClose()">
+        <mat-icon>close</mat-icon></button>
+    <div class="dialog-title">
+        <h3>Edit Session</h3>
+    </div>
+</mat-toolbar>
+<div mat-dialog-content class="dialog-content">
+    <form [formGroup]="editForm" (ngSubmit)="onEditFormSubmit()">
+        <div class="row">
+            <div class="column-label">
+                <mat-label>Customer Name</mat-label>
+            </div>
+            <div class="column-input cName">
+                <span>{{session.customerName}}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column-label">
+                <mat-label>Session Name</mat-label>
+            </div>
+            <div class="column-input sName">
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="sessionName" required class="input-black">
+                    <mat-error *ngIf="editForm.get('sessionName')?.invalid && (editForm.get('sessionName')?.dirty
+        || editForm.get('sessionName')?.touched)" color="warn">
+                        <div class="error-message">
+                            <mat-icon class="error-icon" matTooltip="Error">error</mat-icon>
+                            <div class="error-box">
+                                <div class="error-text">
+                                    <div *ngIf="editForm.get('sessionName')?.hasError('required')"
+                                        matTooltip="Session Name is required.">
+                                        Session Name is required.
+                                    </div>
+                                    <div *ngIf="editForm.get('sessionName')?.hasError('minlength')"
+                                        matTooltip="Session Name must be at least 4 characters long.">
+                                        Session Name must be at least 4 characters long.
+                                    </div>
+                                    <div *ngIf="editForm.get('sessionName')?.hasError('pattern')"
+                                        matTooltip="Session Name will not contain special characters">
+                                        Session Name will not contain special characters.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column-label">
+                <mat-label>Remarks</mat-label>
+            </div>
+        </div>
+        <div>
+            <mat-form-field class="remark" appearance="outline">
+                <textarea matInput formControlName="remarks" required class="input-black"></textarea>
+                <mat-error *ngIf="editForm.get('remarks')?.invalid && (editForm.get('remarks')?.dirty
+        || editForm.get('remarks')?.touched)" color="warn">
+                    <div class="error-message">
+                        <mat-icon class="error-icon" matTooltip="Error">error</mat-icon>
+                        <div class="error-box">
+                            <div class="error-text">
+                                <div *ngIf="editForm.get('remarks')?.hasError('required')"
+                                    matTooltip="Remarks is required.">
+                                    Remarks is required.
+                                </div>
+                                <div *ngIf="editForm.get('remarks')?.hasError('minlength')"
+                                    matTooltip="Remarks must be at least 4 characters long.">
+                                    Remarks must be at least 4 characters long.
+                                </div>
+                                <div *ngIf="editForm.get('remarks')?.hasError('maxlength')"
+                                    matTooltip="Remarks should not exceed 255 characters">
+                                    Remarks should not exceed 255 characters
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="update-button">
+            <button mat-raised-button [disabled]=" !editForm.valid || updateButtonDisabled"
+                type="submit">Update</button>
+        </div>
+    </form>
+</div>
